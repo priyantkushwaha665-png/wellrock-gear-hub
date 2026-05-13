@@ -1,39 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Gear Hub Admin</title>
+    <meta charset="UTF-8">
+    <title>Admin Panel | WellRock</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background: #121212; color: white; display: flex; align-items: center; height: 100vh; }
-        .admin-box { background: #1e1e1e; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 100%; max-width: 450px; margin: auto; border: 1px solid #333; }
-        .form-control, .form-select { background: #2a2a2a; border: 1px solid #444; color: white; margin-bottom: 15px; }
-        .form-control:focus { background: #333; color: white; border-color: #0d6efd; box-shadow: none; }
-        .btn-add { background: #0d6efd; border: none; font-weight: bold; padding: 12px; }
+        body { background-color: #0b0e11; color: #fff; padding-top: 50px; }
+        .admin-card { background-color: #1c2127; padding: 30px; border-radius: 15px; border: 1px solid #00ff41; max-width: 500px; margin: auto; }
+        .form-control { background-color: #0b0e11; border: 1px solid #333; color: #fff; margin-bottom: 15px; }
+        .form-control:focus { background-color: #0b0e11; color: #fff; border-color: #00ff41; box-shadow: none; }
+        .btn-add { background-color: #00ff41; color: #000; font-weight: bold; width: 100%; }
     </style>
 </head>
 <body>
 
-<div class="admin-box">
-    <h2 class="text-center mb-4 text-primary">Add New Gear</h2>
-    <form method="POST">
-        <input type="password" name="password" class="form-control" placeholder="Enter Admin Password" required>
-        <hr style="border-color: #444;">
-        <input type="text" name="name" class="form-control" placeholder="Product Name (e.g. Apex Pro TKL)" required>
-        <input type="text" name="price" class="form-control" placeholder="Price (e.g. ₹16,500)" required>
-        <input type="text" name="img_url" class="form-control" placeholder="Image Link (Paste URL here)" required>
-        
-        <select name="category" class="form-select">
-            <option value="Keyboard">Keyboard</option>
-            <option value="Mouse">Mouse</option>
-            <option value="Audio">Audio/Headset</option>
-            <option value="Monitor">Monitor</option>
-            <option value="Other">Other Accessories</option>
-        </select>
-
-        <button type="submit" class="btn btn-add w-100 mt-3">Add to Website</button>
-    </form>
-    <div class="text-center mt-4">
-        <a href="/" class="text-secondary text-decoration-none small">← Back to Store</a>
+<div class="container">
+    <div class="admin-card">
+        <h2 class="text-center mb-4" style="font-family: 'Orbitron'; color: #00ff41;">Add New Gear</h2>
+        <form method="POST">
+            <input type="password" name="password" class="form-control" placeholder="Admin Password" required>
+            <hr style="border-color: #333;">
+            <input type="text" name="name" class="form-control" placeholder="Product Name (e.g. Mouse)" required>
+            <input type="text" name="price" class="form-control" placeholder="Price (e.g. 5,999)" required>
+            <input type="text" name="img" class="form-control" placeholder="Image URL" required>
+            <input type="text" name="affiliate_link" class="form-control" placeholder="Amazon Affiliate Link" required>
+            <button type="submit" class="btn btn-add">Add to Store</button>
+        </form>
     </div>
 </div>
 
