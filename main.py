@@ -27,7 +27,7 @@ def index():
 def admin():
     if request.method == 'POST':
         password = request.form.get('password')
-        if password == "wellrockgearhab"
+        if password == "wellrockgearhab":
             name = request.form.get('name')
             price = request.form.get('price')
             img_url = request.form.get('img_url')
