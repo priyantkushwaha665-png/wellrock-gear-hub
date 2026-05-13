@@ -1,25 +1,30 @@
-from flask import Flask, render_template, request, redirect
-import sqlite3
 import os
+import sqlite3
+from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 
-# Database configuration
-DB_FILE = 'database.db'
+# Database file setup
+basedir = os.path.abspath(os.path.dirname(__file__))
+DB_FILE = os.path.join(basedir, 'database.db')
 
 def init_db():
     conn = sqlite3.connect(DB_FILE)
-    conn.execute('CREATE TABLE IF NOT EXISTS products (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, price TEXT, img_url TEXT)')
+    cur = conn.cursor()
+    # Naya column 'affiliate_link' ke saath table banayenge
+    cur.execute('''CREATE TABLE IF NOT EXISTS products 
+                   (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                    name TEXT, price TEXT, img TEXT, affiliate_link TEXT)''')
+    conn.commit()
     conn.close()
-
-init_db()
 
 @app.route('/')
 def index():
+    init_db()
     conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM products')
-    items = cursor.fetchall()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM products")
+    items = cur.fetchall()
     conn.close()
     return render_template('index.html', products=items)
 
@@ -30,18 +35,18 @@ def admin():
         if password == "wellrockgearhab":
             name = request.form.get('name')
             price = request.form.get('price')
-            img_url = request.form.get('img_url')
+            img = request.form.get('img')
+            affiliate_link = request.form.get('affiliate_link')
             
             conn = sqlite3.connect(DB_FILE)
-            cursor = conn.cursor()
-            cursor.execute('INSERT INTO products (name, price, img_url) VALUES (?, ?, ?)', (name, price, img_url))
+            cur = conn.cursor()
+            cur.execute("INSERT INTO products (name, price, img, affiliate_link) VALUES (?, ?, ?, ?)", 
+                        (name, price, img, affiliate_link))
             conn.commit()
             conn.close()
             return redirect('/')
-        else:
-            return "Galat Password! Dubara try karein."
-    
     return render_template('admin.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000)
+    init_db()
+    app.run(debug=True)
