@@ -5,24 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WellRock Gear Hub | Great Deals</title>
     
-    <!-- Emergent Style Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         :root {
             --gaming-green: #00ff41;
             --dark-bg: #0b0e11;
-            --card-bg: rgba(21, 25, 29, 0.85);
+            --card-bg: rgba(21, 25, 29, 0.9);
         }
 
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
-                        url('https://chatgpt.com/backend-api/estuary/content?id=file_0000000022447208855a6abb34bdc720&ts=494089&p=fs&cid=1&sig=e9614de74cf4a6edd5eb2631252a10bb96fd7c21e54ffde06184bf15ebcb4619&v=0');
+            /* Aapka bheja hua image link yahan laga diya hai */
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('https://i.postimg.cc/rwTnVrLm/download.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -31,7 +31,6 @@
             min-height: 100vh;
         }
 
-        /* Nav Style from Emergent vibe */
         .navbar {
             background: rgba(11, 14, 17, 0.95);
             backdrop-filter: blur(10px);
@@ -48,49 +47,48 @@
             text-decoration: none;
         }
 
-        /* The "Great Deals" Section */
         .promo-container {
-            padding: 100px 0 50px 0;
+            padding: 120px 0 60px 0;
             text-align: center;
         }
 
         .great-deals-text {
             font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
+            font-size: clamp(3rem, 10vw, 5rem); /* Responsive size */
             color: var(--gaming-green);
-            text-shadow: 0 0 20px rgba(0, 255, 65, 0.6);
+            text-shadow: 0 0 30px rgba(0, 255, 65, 0.8);
             margin-bottom: 10px;
             font-weight: 900;
+            letter-spacing: 10px;
         }
 
         .sub-text {
             font-family: 'JetBrains Mono', monospace;
             color: #aaa;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
+            letter-spacing: 3px;
+            font-size: 1rem;
         }
 
-        /* Product Cards */
         .card {
             background: var(--card-bg);
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
+            border-radius: 15px;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(8px);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(12px);
             margin-bottom: 30px;
         }
 
         .card:hover {
-            transform: translateY(-12px);
+            transform: translateY(-10px) scale(1.02);
             border-color: var(--gaming-green);
-            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 255, 65, 0.2);
         }
 
         .card-img-container {
             background: #fff;
-            padding: 25px;
-            height: 220px;
+            padding: 20px;
+            height: 230px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -103,50 +101,49 @@
         }
 
         .card-body {
-            padding: 20px;
+            padding: 25px;
             text-align: center;
         }
 
         .card-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: #fff;
             margin-bottom: 15px;
         }
 
         .price-tag {
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-size: 1.5rem;
+            font-weight: 800;
             color: var(--gaming-green);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .buy-btn {
             background: var(--gaming-green);
             color: #000;
-            font-weight: 800;
+            font-weight: 900;
             text-transform: uppercase;
-            padding: 12px;
-            border-radius: 6px;
+            padding: 14px;
+            border-radius: 8px;
             text-decoration: none;
             display: block;
             transition: 0.3s;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
+            letter-spacing: 1px;
         }
 
         .buy-btn:hover {
             background: #fff;
+            box-shadow: 0 0 20px #fff;
             color: #000;
-            box-shadow: 0 0 15px #fff;
         }
 
         footer {
-            padding: 40px 0;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 60px 0;
+            color: #555;
+            font-size: 0.9rem;
             text-align: center;
-            font-size: 0.8rem;
-            color: #666;
         }
     </style>
 </head>
@@ -161,7 +158,7 @@
 <div class="promo-container">
     <div class="container">
         <h1 class="great-deals-text">GREAT DEALS</h1>
-        <p class="sub-text">// PREMIUM GAMING GEAR FOR PRO STREAMERS</p>
+        <p class="sub-text">// EXCLUSIVE GEAR FOR THE COMMUNITY</p>
     </div>
 </div>
 
@@ -176,7 +173,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ product[1] }}</h5>
                     <div class="price-tag">₹{{ product[2] }}</div>
-                    <a href="{{ product[4] }}" target="_blank" class="buy-btn">Get Deal on Amazon</a>
+                    <a href="{{ product[4] }}" target="_blank" class="buy-btn">Grab Deal</a>
                 </div>
             </div>
         </div>
@@ -185,7 +182,7 @@
 </div>
 
 <footer>
-    <p>&copy; 2026 WELLROCK27 CREATIONS | ALL SYSTEM NOMINAL</p>
+    <p>&copy; 2026 WELLROCK GEAR HUB | CREATED BY A STREAMER FOR STREAMERS</p>
 </footer>
 
 </body>
