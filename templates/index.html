@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WellRock Gear Hub | Great Deals</title>
+    <title>WRX GearHub | Premium Gaming Gear</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         :root {
             --gaming-green: #00ff41;
+            --gaming-purple: #9d4edd;
             --dark-bg: #0b0e11;
-            --card-bg: rgba(21, 25, 29, 0.9);
         }
 
         body {
             margin: 0;
             padding: 0;
-            /* Aapka bheja hua image link yahan laga diya hai */
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
                         url('https://i.postimg.cc/rwTnVrLm/download.jpg');
             background-size: cover;
             background-position: center;
@@ -31,149 +30,174 @@
             min-height: 100vh;
         }
 
+        /* Screenshot style Navbar */
         .navbar {
-            background: rgba(11, 14, 17, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 15px 0;
         }
 
-        .brand-name {
+        .navbar-brand {
             font-family: 'Orbitron', sans-serif;
-            color: var(--gaming-green);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .promo-container {
-            padding: 120px 0 60px 0;
-            text-align: center;
-        }
-
-        .great-deals-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3rem, 10vw, 5rem); /* Responsive size */
-            color: var(--gaming-green);
-            text-shadow: 0 0 30px rgba(0, 255, 65, 0.8);
-            margin-bottom: 10px;
             font-weight: 900;
-            letter-spacing: 10px;
+            font-size: 1.5rem;
+            color: #fff !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .sub-text {
+        .navbar-brand span { color: var(--gaming-green); }
+
+        .nav-link {
+            color: #aaa !important;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active { color: var(--gaming-green) !important; }
+
+        .admin-link {
+            font-size: 0.75rem;
+            color: #fff !important;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0.8;
+        }
+        .admin-link:hover { opacity: 1; color: var(--gaming-green) !important; }
+
+        /* Hero Section from Screenshot */
+        .hero-section {
+            padding: 150px 0 80px 0;
+        }
+
+        .updated-badge {
+            display: inline-block;
+            border: 1px solid var(--gaming-green);
+            color: var(--gaming-green);
+            padding: 5px 15px;
+            font-size: 0.7rem;
             font-family: 'JetBrains Mono', monospace;
-            color: #aaa;
-            letter-spacing: 3px;
-            font-size: 1rem;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-bottom: 20px;
         }
 
-        .card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(12px);
+        .hero-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            line-height: 1.1;
             margin-bottom: 30px;
         }
 
-        .card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: var(--gaming-green);
-            box-shadow: 0 15px 40px rgba(0, 255, 65, 0.2);
+        .text-green { color: var(--gaming-green); }
+        .text-purple { color: var(--gaming-purple); }
+
+        .hero-sub {
+            color: #aaa;
+            max-width: 500px;
+            margin-bottom: 40px;
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
-        .card-img-container {
-            background: #fff;
-            padding: 20px;
-            height: 230px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .card-img-top {
-            max-height: 100%;
-            width: auto;
-            object-fit: contain;
-        }
-
-        .card-body {
-            padding: 25px;
-            text-align: center;
-        }
-
-        .card-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: #fff;
-            margin-bottom: 15px;
-        }
-
-        .price-tag {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--gaming-green);
-            margin-bottom: 25px;
-        }
-
-        .buy-btn {
+        .btn-green {
             background: var(--gaming-green);
             color: #000;
-            font-weight: 900;
-            text-transform: uppercase;
-            padding: 14px;
-            border-radius: 8px;
+            font-weight: 800;
+            padding: 15px 30px;
+            border-radius: 4px;
             text-decoration: none;
-            display: block;
-            transition: 0.3s;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-right: 20px;
             font-family: 'Orbitron', sans-serif;
-            letter-spacing: 1px;
         }
 
-        .buy-btn:hover {
-            background: #fff;
-            box-shadow: 0 0 20px #fff;
-            color: #000;
+        .btn-outline {
+            border: 1px solid #fff;
+            color: #fff;
+            font-weight: 800;
+            padding: 15px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
         }
 
-        footer {
-            padding: 60px 0;
-            color: #555;
-            font-size: 0.9rem;
-            text-align: center;
+        /* Products Grid */
+        .card {
+            background: rgba(21, 25, 29, 0.9);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
         }
+
+        .price-tag { color: var(--gaming-green); font-weight: bold; font-size: 1.2rem; }
     </style>
 </head>
 <body>
 
-<nav class="navbar fixed-top">
-    <div class="container d-flex justify-content-center">
-        <a class="brand-name" href="#">WellRock Gear Hub</a>
+<!-- Navbar (Same as Screenshot) -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#"><span>⚡</span> WRX.GearHub</a>
+        
+        <div class="collapse navbar-collapse justify-content-center">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Gaming Gear</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Tech</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Streaming</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Deals</a></li>
+            </ul>
+        </div>
+
+        <!-- Seedha Admin Panel Link -->
+        <a href="/admin" class="admin-link">👤 Admin</a>
     </div>
 </nav>
 
-<div class="promo-container">
-    <div class="container">
-        <h1 class="great-deals-text">GREAT DEALS</h1>
-        <p class="sub-text">// EXCLUSIVE GEAR FOR THE COMMUNITY</p>
+<div class="hero-section container">
+    <div class="updated-badge">⚡ UPDATED WEEKLY • 2026 PICKS</div>
+    <h1 class="hero-title">
+        Arena-grade<br>
+        gear. <span class="text-green">Ruthlessly</span><br>
+        reviewed. <span class="text-purple">Always</span><br>
+        affiliate-linked.
+    </h1>
+    <p class="hero-sub">
+        WRX Gear Hub is where competitive gamers, streamers, and tinkerers land gear they'll actually use — tested and ranked.
+    </p>
+    <div class="d-flex">
+        <a href="#store" class="btn-green">Shop Gaming Gear →</a>
+        <a href="#" class="btn-outline">Read the Blog</a>
     </div>
 </div>
 
-<div class="container mt-4">
+<div class="container mt-5" id="store">
     <div class="row">
         {% for product in products %}
         <div class="col-lg-4 col-md-6">
-            <div class="card">
-                <div class="card-img-container">
-                    <img src="{{ product[3] }}" class="card-img-top" alt="{{ product[1] }}">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ product[1] }}</h5>
-                    <div class="price-tag">₹{{ product[2] }}</div>
-                    <a href="{{ product[4] }}" target="_blank" class="buy-btn">Grab Deal</a>
+            <div class="card p-3">
+                <img src="{{ product[3] }}" class="card-img-top rounded bg-white p-3" style="height:200px; object-fit:contain;">
+                <div class="card-body text-center">
+                    <h5 class="card-title Orbitron">{{ product[1] }}</h5>
+                    <p class="price-tag">₹{{ product[2] }}</p>
+                    <a href="{{ product[4] }}" target="_blank" class="btn-green w-100 m-0">Grab Deal</a>
                 </div>
             </div>
         </div>
@@ -181,8 +205,8 @@
     </div>
 </div>
 
-<footer>
-    <p>&copy; 2026 WELLROCK GEAR HUB | CREATED BY A STREAMER FOR STREAMERS</p>
+<footer class="text-center py-5 mt-5">
+    <p style="color:#555; font-size: 0.8rem;">&copy; 2026 WRX GEARHUB | BY WELLROCK27</p>
 </footer>
 
 </body>
