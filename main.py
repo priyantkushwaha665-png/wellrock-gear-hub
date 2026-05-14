@@ -3,7 +3,7 @@ import sqlite3
 from flask import Flask, render_template, request, redirect, url_for, session
 
 app = Flask(__name__)
-app.secret_key = "wellrock_secret_key_123" # Session secure karne ke liye
+app.secret_key = "wellrock_secret_2026"
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 DB_FILE = os.path.join(basedir, 'database.db')
@@ -11,9 +11,11 @@ DB_FILE = os.path.join(basedir, 'database.db')
 def init_db():
     conn = sqlite3.connect(DB_FILE)
     cur = conn.cursor()
+    # Database with Category, Review, and Rating
     cur.execute('''CREATE TABLE IF NOT EXISTS products 
                    (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                    name TEXT, price TEXT, img TEXT, affiliate_link TEXT, category TEXT)''')
+                    name TEXT, price TEXT, img TEXT, affiliate_link TEXT, 
+                    category TEXT, review TEXT, rating INTEGER)''')
     conn.commit()
     conn.close()
 
@@ -33,9 +35,8 @@ def index():
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
-    # Login Check
     if request.method == 'POST':
-        # Agar login form submit hua hai
+        # Login Logic
         if 'login_btn' in request.form:
             user = request.form.get('username')
             pwd = request.form.get('password')
@@ -43,21 +44,21 @@ def admin():
                 session['logged_in'] = True
                 return redirect(url_for('admin'))
             else:
-                return "Galat Username ya Password!"
+                return "Invalid Credentials!"
         
-        # Agar Product add form submit hua hai
+        # Add Product Logic
         elif 'add_product' in request.form and session.get('logged_in'):
             conn = sqlite3.connect(DB_FILE)
             cur = conn.cursor()
-            cur.execute("INSERT INTO products (name, price, img, affiliate_link, category) VALUES (?, ?, ?, ?, ?)", 
+            cur.execute("INSERT INTO products (name, price, img, affiliate_link, category, review, rating) VALUES (?, ?, ?, ?, ?, ?, ?)", 
                         (request.form.get('name'), request.form.get('price'), 
                          request.form.get('img'), request.form.get('affiliate_link'), 
-                         request.form.get('category')))
+                         request.form.get('category'), request.form.get('review'),
+                         request.form.get('rating')))
             conn.commit()
             conn.close()
             return redirect(url_for('admin'))
 
-    # Admin page view logic
     items = []
     if session.get('logged_in'):
         conn = sqlite3.connect(DB_FILE)
