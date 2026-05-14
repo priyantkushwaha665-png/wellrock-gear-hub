@@ -3,7 +3,7 @@ import sqlite3
 from flask import Flask, render_template, request, redirect, url_for, session
 
 app = Flask(__name__)
-app.secret_key = "wellrock_secret_2026"
+app.secret_key = "wellrock_secure_2026"
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 DB_FILE = os.path.join(basedir, 'database.db')
@@ -11,11 +11,16 @@ DB_FILE = os.path.join(basedir, 'database.db')
 def init_db():
     conn = sqlite3.connect(DB_FILE)
     cur = conn.cursor()
-    # Database with Category, Review, and Rating
+    # Updated Schema: added real_price and public_reviews
     cur.execute('''CREATE TABLE IF NOT EXISTS products 
                    (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                    name TEXT, price TEXT, img TEXT, affiliate_link TEXT, 
-                    category TEXT, review TEXT, rating INTEGER)''')
+                    name TEXT, real_price TEXT, discount_price TEXT, img TEXT, 
+                    affiliate_link TEXT, category TEXT, review TEXT, rating INTEGER)''')
+    
+    # Table for Public Reviews
+    cur.execute('''CREATE TABLE IF NOT EXISTS user_reviews 
+                   (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                    product_id INTEGER, user_name TEXT, user_text TEXT)''')
     conn.commit()
     conn.close()
 
@@ -33,25 +38,33 @@ def index():
     conn.close()
     return render_template('index.html', products=items)
 
+@app.route('/submit_review', methods=['POST'])
+def submit_review():
+    p_id = request.form.get('product_id')
+    name = request.form.get('user_name')
+    msg = request.form.get('user_text')
+    conn = sqlite3.connect(DB_FILE)
+    cur = conn.cursor()
+    cur.execute("INSERT INTO user_reviews (product_id, user_name, user_text) VALUES (?, ?, ?)", (p_id, name, msg))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('index'))
+
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     if request.method == 'POST':
-        # Login Logic
         if 'login_btn' in request.form:
             user = request.form.get('username')
             pwd = request.form.get('password')
             if user == "wellrock27" and pwd == "wellrockgearhab":
                 session['logged_in'] = True
                 return redirect(url_for('admin'))
-            else:
-                return "Invalid Credentials!"
         
-        # Add Product Logic
         elif 'add_product' in request.form and session.get('logged_in'):
             conn = sqlite3.connect(DB_FILE)
             cur = conn.cursor()
-            cur.execute("INSERT INTO products (name, price, img, affiliate_link, category, review, rating) VALUES (?, ?, ?, ?, ?, ?, ?)", 
-                        (request.form.get('name'), request.form.get('price'), 
+            cur.execute("INSERT INTO products (name, real_price, discount_price, img, affiliate_link, category, review, rating) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
+                        (request.form.get('name'), request.form.get('real_price'), request.form.get('discount_price'),
                          request.form.get('img'), request.form.get('affiliate_link'), 
                          request.form.get('category'), request.form.get('review'),
                          request.form.get('rating')))
