@@ -8,7 +8,7 @@ DB_FILE = 'database.db'
 def init_db():
     conn = sqlite3.connect(DB_FILE)
     cur = conn.cursor()
-    # IMPORTANT: Ye purani table delete karega taaki naye columns ban sakein
+    # Table drop logic (sirf naye updates ke liye)
     cur.execute('DROP TABLE IF EXISTS products')
     cur.execute('''CREATE TABLE IF NOT EXISTS products 
                    (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, real_price TEXT, 
@@ -24,9 +24,13 @@ init_db()
 
 @app.route('/')
 def index():
+    cat = request.args.get('cat')
     conn = sqlite3.connect(DB_FILE)
     cur = conn.cursor()
-    cur.execute("SELECT * FROM products")
+    if cat:
+        cur.execute("SELECT * FROM products WHERE category = ?", (cat,))
+    else:
+        cur.execute("SELECT * FROM products")
     products = cur.fetchall()
     conn.close()
     return render_template('index.html', products=products)
@@ -40,9 +44,11 @@ def product_page(id):
     cur.execute("SELECT * FROM user_reviews WHERE product_id = ?", (id,))
     reviews = cur.fetchall()
     conn.close()
-    if product is None:
-        return "Product Not Found", 404
     return render_template('product.html', product=product, reviews=reviews)
+
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
 
 @app.route('/submit_review', methods=['POST'])
 def submit_review():
